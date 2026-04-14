@@ -6,3 +6,6 @@ internal/config/.env
 
 # DB local
 out/
+
+# Swagger docs (generated)
+docs/
