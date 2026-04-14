@@ -1,9 +1,8 @@
 # Environment variables
-.env
+internal/config/.env
 
 # IDE
 .idea/
 
 # DB local
 out/
-~Force/

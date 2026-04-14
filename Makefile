@@ -1,4 +1,4 @@
-include .env
+include internal/config/.env
 export
 
 env-up:
@@ -8,10 +8,10 @@ env-down:
 	@docker compose down
 
 env-cleanup:
-	@cmd\scripts\env-cleanup.bat
+	@internal\config\scripts\env-cleanup.bat
 
 migrate-create:
-	@cmd\scripts\migrate-create.bat
+	@internal\config\scripts\migrate-create.bat
 
 migrate-up:
 	@make migrate-action action=up
@@ -20,4 +20,7 @@ migrate-down:
 	@make migrate-action action=down
 
 migrate-action:
-	@cmd\scripts\migrate-action.bat
+	@internal\config\scripts\migrate-action.bat
+
+pollsapp-run:
+	@go run cmd/server/main.go
