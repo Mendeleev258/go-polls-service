@@ -1,6 +1,6 @@
 .PHONY: env-up env-down env-cleanup migrate-create migrate-up migrate-down migrate-action swagger-docs pollsapp-run
 
-include internal/config/.env
+include internal/core/config/.env
 export
 
 env-up:
@@ -10,10 +10,10 @@ env-down:
 	@docker compose down
 
 env-cleanup:
-	@internal\config\scripts\env-cleanup.bat
+	@internal\core\config\scripts\env-cleanup.bat
 
 migrate-create:
-	@internal\config\scripts\migrate-create.bat
+	@internal\core\config\scripts\migrate-create.bat
 
 migrate-up:
 	@make migrate-action action=up
@@ -22,10 +22,12 @@ migrate-down:
 	@make migrate-action action=down
 
 migrate-action:
-	@internal\config\scripts\migrate-action.bat
+	@internal\core\config\scripts\migrate-action.bat
 
 swagger-docs:
 	C:\Users\jrosl\go\bin\swag.exe init -g cmd/server/main.go -o docs
 
 pollsapp-run:
-	@go run cmd/server/main.go
+	set "LOGGER_FOLDER=$(PROJECT_ROOT)\out\logs" && \
+	go mod tidy && \
+	go run cmd/main/main.go
